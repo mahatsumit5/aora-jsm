@@ -15,7 +15,7 @@ export default function App() {
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
-        <View className="w-full justify-center items-center h-[80vh] px-4">
+        <View className="w-full max-w-[600px] mx-auto justify-center items-center h-[80vh] px-4">
           <Image
             source={images.logo}
             className="w-[130px] h-[84px]"
@@ -42,22 +42,13 @@ export default function App() {
             Where creativity meets innovation: embark on a journey of limitless
             exploration
           </Text>
-          {/* <CustomButton
+          <CustomButton
             title="Continue with Email"
-            handlePress={() => {}}
-            containerStyles="w-full mt-7"
-          /> */}
-
-          <Pressable
-            onPress={() => {
+            handlePress={() => {
               router.push("/sign-in");
             }}
-            className="w-full bg-secondary-100 items-center p-4 rounded-md hover:bg-secondary/50"
-          >
-            <Text className="text-black-100  font-psemibold">
-              Continue with Email
-            </Text>
-          </Pressable>
+            containerStyles="w-full mt-7"
+          />
         </View>
       </ScrollView>
       <StatusBar backgroundColor="#161622" style="light" />

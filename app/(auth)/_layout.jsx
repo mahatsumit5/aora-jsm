@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import Check from "../../components/Check";
+import Check from "../../components/FormField";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
