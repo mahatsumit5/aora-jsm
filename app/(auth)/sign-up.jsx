@@ -1,21 +1,40 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 import React, { useState } from "react";
-import Check from "../../components/FormField";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import FormField from "../../components/FormField";
 
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { createUser } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 const SignUp = () => {
+  const { setUser } = useGlobalContext();
+  console.log(setUser);
   const [form, setform] = useState({
-    userName: "",
+    username: "",
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function submit() {
-    console.log(form);
+  async function submit() {
+    if (form.username === "" || form.email === "" || form.password === "") {
+      Alert.alert("Error", "All the details are required");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const user = await createUser(form.email, form.password, form.username);
+      setUser(user);
+      // set user to global state....using reduc or zustland
+      user && router.replace("/home");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+    createUser();
   }
 
   return (
@@ -32,8 +51,8 @@ const SignUp = () => {
           </Text>
           <FormField
             title="Username"
-            value={form.userName}
-            handleOnChangeText={(e) => setform({ ...form, userName: e })}
+            value={form.username}
+            handleOnChangeText={(e) => setform({ ...form, username: e })}
             otherStyles="mt-7 "
             keyboardType="email-address"
           />
@@ -55,6 +74,7 @@ const SignUp = () => {
             title={"Sign Up"}
             containerStyles={"mt-7"}
             handlePress={submit}
+            isLoading={isSubmitting}
           />
           <View className="justify-center gap-2 flex-row pt-5">
             <Text className="text-lg text-gray-100 font-pregular ">
