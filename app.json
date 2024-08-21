@@ -33,6 +33,12 @@
         {
           "fonts": ["path/to/file.ttf"]
         }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow Aora to access your microphone."
+        }
       ]
     ]
   }
