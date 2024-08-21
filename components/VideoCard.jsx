@@ -3,14 +3,7 @@ import React, { useState } from "react";
 import { icons } from "../constants";
 import { ResizeMode, Video } from "expo-av";
 
-const VideoCard = ({
-  video: {
-    title,
-    thumbnail,
-    video,
-    creator: { username, avatar },
-  },
-}) => {
+const VideoCard = ({ title, thumbnail, video, creator, avatar }) => {
   const [play, setPlay] = useState(false);
   return (
     <View className="flex-col items-center px-4 mb-14">
@@ -31,7 +24,7 @@ const VideoCard = ({
               className="text-gray-100 text-xs font-pregular"
               numberOfLines={1}
             >
-              {username}
+              {creator}
             </Text>
           </View>
         </View>
@@ -45,7 +38,9 @@ const VideoCard = ({
       </View>
       {play ? (
         <Video
-          source={{ uri: video }}
+          source={{
+            uri: "https://cfw-image-bucket.s3.ap-southeast-2.amazonaws.com/test.mp4",
+          }}
           className="w-full h-60 rounded-xl mt-3 "
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls

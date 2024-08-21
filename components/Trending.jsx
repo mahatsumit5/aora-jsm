@@ -28,7 +28,6 @@ const zoomOut = {
   },
 };
 const TrendingItem = ({ activeItem, item }) => {
-  console.log(item.video);
   const [play, setPlay] = useState(false);
   return (
     <Animatable.View
@@ -38,7 +37,9 @@ const TrendingItem = ({ activeItem, item }) => {
     >
       {play ? (
         <Video
-          source={{ uri: item.video }}
+          source={{
+            uri: item.video,
+          }}
           className="w-52 h-72 rounded-[35px] mt-3 bg-white/20"
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls
@@ -47,8 +48,8 @@ const TrendingItem = ({ activeItem, item }) => {
             if (status.didJustFinish) {
               setPlay(false);
             }
-            return true;
           }}
+          onError={(err) => console.log(err)}
         />
       ) : (
         <TouchableOpacity
