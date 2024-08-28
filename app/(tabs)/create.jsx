@@ -24,7 +24,6 @@ const initialState = {
 };
 const Create = () => {
   const { user } = useGlobalContext();
-  console.log("this si user", user);
   const [form, setForm] = useState(initialState);
   const [uploading, setUploading] = useState(false);
 
@@ -39,7 +38,6 @@ const Create = () => {
     if (!result.canceled) {
       switch (filetype) {
         case "image":
-          console.log(result);
           setForm({ ...form, thumbnail: result.assets[0] });
           break;
         case "video":
@@ -59,7 +57,7 @@ const Create = () => {
     try {
       const newPost = await createVideo({ ...form, userId: user?.$id });
       Alert.alert("Success", "New post created");
-      newPost?.$id && router.push("/home");
+      router.push("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {

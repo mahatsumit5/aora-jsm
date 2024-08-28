@@ -10,7 +10,7 @@ import { createUser } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 const SignUp = () => {
   const { setUser } = useGlobalContext();
-  console.log(setUser);
+
   const [form, setform] = useState({
     username: "",
     email: "",
